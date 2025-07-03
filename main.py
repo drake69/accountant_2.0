@@ -1,5 +1,5 @@
 from p7m_to_xml import p7m_to_xml
-from unzip import estrai_zip_ricorsivo
+from unzip import unzip
 from separazione import separate_files
 from Anonimizzazione import xml_to_csvs
 
