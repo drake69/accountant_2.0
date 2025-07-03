@@ -1,7 +1,7 @@
 from p7m_to_xml import process_folder
 from unzip import unzip
 from separazione import separate_files
-from Anonimizzazione import xml_tocsvs
+from Anonimizzazione import xml_to_csvs
 
 def main(INPUT_FOLDER, UNZIPPED_FOLDER, XML_FOLDER = 'xml', P7M_FOLDER = 'p7m', CSV_OUTPUT = 'output.csv'):
     print("=== PROJECT COORDINATION STARTING ===\n")
@@ -23,7 +23,7 @@ def main(INPUT_FOLDER, UNZIPPED_FOLDER, XML_FOLDER = 'xml', P7M_FOLDER = 'p7m', 
     
     # Step 4: Group 4 - Convert XML to CSV
     print("Step 4: Group 4 - Converting XML to CSV...")
-    xml_tocsvs(XML_FOLDER, CSV_OUTPUT)
+    xml_to_csvs(XML_FOLDER, CSV_OUTPUT)
     
     print("=== PROJECT COORDINATION COMPLETED ===")
 

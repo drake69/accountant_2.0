@@ -1,5 +1,6 @@
 import os
 import shutil
+
 def separate_files(source_folder, xml_folder, p7m_folder):
     """
     Group 2 main function: Separates XML and P7M files into their respective folders
