@@ -32,11 +32,14 @@ def xml_tocsvs(path_xml, output_folder):
 
     for cessionario in df['CodiceFiscaleCessionario'].unique(): 
         df_data_azienda=df[df['CodiceFiscaleCessionario'] == cessionario]
+<<<<<<< HEAD
         path=pathlib.Path(output_folder)/(cessionario+'.csv')
+=======
+        path = pathlib.Path(output_folder) / (str(cessionario) + '.csv')
+>>>>>>> de8177244c7b75c4da24b659769d9bb95fb05028
         path.parent.mkdir(parents=True, exist_ok=True)
         df_data_azienda.drop(columns=['CodiceFiscaleCessionario']).to_csv(path, index=False)
         df_data_azienda = pd.DataFrame()
-    
 
 if __name__ == "__main__":
     path_xml = 'path_to_your_xml_files'  # Replace with your XML files path
