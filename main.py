@@ -1,15 +1,15 @@
 from p7m_to_xml import p7m_to_xml
 from unzip import estrai_zip_ricorsivo
 from separazione import separate_files
-from Anonimizzazione import xml_tocsvs
+from Anonimizzazione import xml_to_csvs
 
 def main(INPUT_FOLDER, UNZIPPED_FOLDER, XML_FOLDER = 'xml', P7M_FOLDER = 'p7m', CSV_OUTPUT = 'output.csv'):
     print("=== PROJECT COORDINATION STARTING ===\n")
     
     # Step 1: Group 1 - Unzip files
     print("Step 1: Group 1 - Unzipping files...")
-    unzipped_path = estrai_zip_ricorsivo(INPUT_FOLDER, cartella_destinazione=UNZIPPED_FOLDER)
-    print(f"Unzipping completed. Files available at: {unzipped_path}\n")
+    unzip(INPUT_FOLDER, cartella_destinazione=UNZIPPED_FOLDER)
+    print(f"Unzipping completed. Files available at: {UNZIPPED_FOLDER}\n")
     
     # Step 2: Group 2 - Separate XML and P7M files
     print("Step 2: Group 2 - Separating files...")
@@ -23,7 +23,7 @@ def main(INPUT_FOLDER, UNZIPPED_FOLDER, XML_FOLDER = 'xml', P7M_FOLDER = 'p7m', 
     
     # Step 4: Group 4 - Convert XML to CSV
     print("Step 4: Group 4 - Converting XML to CSV...")
-    xml_tocsvs(XML_FOLDER, CSV_OUTPUT)
+    xml_to_csvs(XML_FOLDER, CSV_OUTPUT)
     
     print("=== PROJECT COORDINATION COMPLETED ===")
 
