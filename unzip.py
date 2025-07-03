@@ -2,7 +2,7 @@ import os
 import zipfile
 from pathlib import Path
 
-def estrai_zip_ricorsivo(cartella_base, elimina_zip=False, cartella_destinazione="unzipped"):
+def unzip(cartella_base, elimina_zip=False, cartella_destinazione="unzipped"):
     """
     Estrae tutti i file ZIP trovati ricorsivamente in una cartella.
     Continua l'estrazione fino a quando non rimangono più file ZIP da estrarre (gestisce ZIP annidati).
@@ -69,7 +69,7 @@ def estrai_zip_ricorsivo(cartella_base, elimina_zip=False, cartella_destinazione
                         'contenuto': file_list
                     })
                     
-                    print(f"✓ Estratto: {zip_path}")
+                    print(f"Estratto: {zip_path}")
                     
                 except zipfile.BadZipFile:
                     risultati.append({
@@ -77,7 +77,7 @@ def estrai_zip_ricorsivo(cartella_base, elimina_zip=False, cartella_destinazione
                         'stato': 'errore - file ZIP corrotto',
                         'destinazione': None
                     })
-                    print(f"✗ Errore - file corrotto: {zip_path}")
+                    print(f"Errore - file corrotto: {zip_path}")
                     continue
                     
                 except PermissionError:
@@ -86,7 +86,7 @@ def estrai_zip_ricorsivo(cartella_base, elimina_zip=False, cartella_destinazione
                         'stato': 'errore - permessi insufficienti',
                         'destinazione': None
                     })
-                    print(f"✗ Errore - permessi: {zip_path}")
+                    print(f"Errore - permessi: {zip_path}")
                     continue
                     
                 except Exception as e:
@@ -95,7 +95,7 @@ def estrai_zip_ricorsivo(cartella_base, elimina_zip=False, cartella_destinazione
                         'stato': f'errore - {str(e)}',
                         'destinazione': None
                     })
-                    print(f"✗ Errore generico: {zip_path} - {e}")
+                    print(f"Errore generico: {zip_path} - {e}")
                     continue
         
         # Elimina i file ZIP di questo ciclo (dopo averli tutti estratti)
@@ -104,24 +104,24 @@ def estrai_zip_ricorsivo(cartella_base, elimina_zip=False, cartella_destinazione
                 # Elimina ZIP dalla cartella originale se richiesto
                 if elimina_zip and not str(zip_path).startswith(str(dest_dir)):
                     zip_path.unlink()
-                    print(f"✓ Eliminato ZIP originale: {zip_path}")
+                    print(f"Eliminato ZIP originale: {zip_path}")
                 # Elimina sempre i ZIP estratti nella cartella di destinazione
                 elif str(zip_path).startswith(str(dest_dir)):
                     zip_path.unlink()
                     print(f"✓ Eliminato ZIP estratto: {zip_path}")
             except Exception as e:
-                print(f"⚠️ Errore eliminazione {zip_path}: {e}")
+                print(f"Errore eliminazione {zip_path}: {e}")
         
         # Se non sono stati trovati ZIP, esci dal ciclo
         if not zip_trovati:
-            print(f"✓ Nessun altro file ZIP trovato. Estrazione completata in {ciclo-1} cicli.")
+            print(f"Nessun altro file ZIP trovato. Estrazione completata in {ciclo-1} cicli.")
             break
             
         ciclo += 1
         
         # Protezione contro cicli infiniti
         if ciclo > 100:
-            print("⚠️ Raggiunto limite massimo di cicli (100). Interruzione per sicurezza.")
+            print("Raggiunto limite massimo di cicli (100). Interruzione per sicurezza.")
             break
     
     return risultati
@@ -130,8 +130,9 @@ def estrai_zip_ricorsivo(cartella_base, elimina_zip=False, cartella_destinazione
 # Esempio di utilizzo
 if __name__ == "__main__":
     # Estrai tutti i ZIP (inclusi quelli annidati) nella cartella "unzipped"
-    risultati = estrai_zip_ricorsivo("/Users/lcorsaro/Desktop/PW_2025/ZIP", elimina_zip=False, 
-                                     cartella_destinazione="/Users/lcorsaro/Desktop/PW_2025/ALL")
+    risultati = unzip("/Users/lcorsaro/Desktop/PW_2025/ZIP", 
+                    elimina_zip=False, 
+                    cartella_destinazione="/Users/lcorsaro/Desktop/PW_2025/ALL")
     
     print(f"\nRiepilogo finale: {len(risultati)} file ZIP elaborati")
     for r in risultati:

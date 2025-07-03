@@ -16,7 +16,7 @@ def anonimizza_fattura(df):
         return df, diz
 
 
-def xml_tocsvs(path_xml, output_folder):
+def xml_to_csvs(path_xml, output_folder):
     df = pd.DataFrame()
     diz={}
     for file in os.listdir(path_xml): 
@@ -44,5 +44,5 @@ def xml_tocsvs(path_xml, output_folder):
 if __name__ == "__main__":
     path_xml = 'path_to_your_xml_files'  # Replace with your XML files path
     output_folder = 'output_csvs'  # Replace with your desired output folder
-    xml_tocsvs(path_xml, output_folder)
+    xml_to_csvs(path_xml, output_folder)
     print(f"CSV files created in {output_folder} and anonymization mapping saved in cifratura.csv")
