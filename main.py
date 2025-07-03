@@ -1,4 +1,4 @@
-from p7m_to_xml import process_folder
+from p7m_to_xml import p7m_to_xml
 from unzip import estrai_zip_ricorsivo
 from separazione import separate_files
 from Anonimizzazione import xml_tocsvs
@@ -18,7 +18,7 @@ def main(INPUT_FOLDER, UNZIPPED_FOLDER, XML_FOLDER = 'xml', P7M_FOLDER = 'p7m', 
     
     # Step 3: Group 3 - Convert P7M to XML
     print("Step 3: Group 3 - Converting P7M to XML...")
-    process_folder(P7M_FOLDER, XML_FOLDER)  # This adds converted XMLs to main XML folder
+    p7m_to_xml(P7M_FOLDER, XML_FOLDER)  # This adds converted XMLs to main XML folder
     print()
     
     # Step 4: Group 4 - Convert XML to CSV

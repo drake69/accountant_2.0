@@ -46,8 +46,8 @@ def extract_xml_from_p7m(file_data):
     
     return None
 
-def p7m_to_xml(file_path, output_folder="xml_clean"):
-    """Processa file P7M senza OpenSSL"""
+def p7m_to_xml_file(file_path, output_folder="xml_clean"):
+    """Processa file P7M per file"""
     os.makedirs(output_folder, exist_ok=True)
     
     with open(file_path, 'rb') as f:
@@ -68,16 +68,16 @@ def p7m_to_xml(file_path, output_folder="xml_clean"):
         print(f" XML non trovato in: {file_path}")
         return None
 
-def process_folder(input_folder="p7m", output_folder="xml_clean"):
+def p7m_to_xml(input_folder="p7m", output_folder="xml_clean"):
     """Processa tutti i P7M in una cartella"""
     count = 0
     for filename in os.listdir(input_folder):
         if filename.endswith('.p7m'):
             file_path = os.path.join(input_folder, filename)
-            if p7m_to_xml(file_path, output_folder):
+            if p7m_to_xml_file(file_path, output_folder):
                 count += 1
     print(f" Processati {count} file")
 
 if __name__ == "__main__":
     # Esegui il processo su una cartella specifica
-    process_folder("/Users/lcorsaro/Desktop/PW_2025/P7M", "/Users/lcorsaro/Desktop/PW_2025/XML")
+    p7m_to_xml("/Users/lcorsaro/Desktop/PW_2025/P7M", "/Users/lcorsaro/Desktop/PW_2025/XML")
