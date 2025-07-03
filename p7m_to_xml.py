@@ -78,5 +78,6 @@ def process_folder(input_folder="p7m", output_folder="xml_clean"):
                 count += 1
     print(f" Processati {count} file")
 
-# Uso immediato
-process_folder("p7m", "xml")
+if __name__ == "__main__":
+    # Esegui il processo su una cartella specifica
+    process_folder("/Users/lcorsaro/Desktop/PW_2025/P7M", "/Users/lcorsaro/Desktop/PW_2025/XML")
