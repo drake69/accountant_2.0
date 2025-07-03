@@ -1,15 +1,7 @@
 import os
 import shutil
 from p7m_to_xml import process_folder
-def unzip(path_in, path_out):
-    """Mock function for Group 1 - will be replaced with actual unzip implementation"""
-    print(f"Unzipping from {path_in} to {path_out}")
-    return path_out
-
-def xml_to_csv(path_xml, csv_path):
-    """Mock function for Group 4 - will be replaced with actual XML to CSV implementation"""
-    print(f"Converting XML files from {path_xml} to CSV at {csv_path}")
-    return csv_path
+from unzip import estrai_zip_ricorsivo
 
 def separate_files(source_folder, xml_folder, p7m_folder):
     """
@@ -62,20 +54,12 @@ def separate_files(source_folder, xml_folder, p7m_folder):
     print(f"- P7M files moved: {p7m_count}")
     print(f"- Other files: {other_count}")
 
-def main():
-    """Main coordination function"""
-    # Define folder paths
-    INPUT_FOLDER = 'zip'              # Group 1 input
-    UNZIPPED_FOLDER = 'unzippati'     # Group 1 output
-    XML_FOLDER = 'xml'                # Final XML folder
-    P7M_FOLDER = 'p7m'                # P7M processing folder
-    CSV_OUTPUT = 'output.csv'         # Group 4 output
-    
+def main(INPUT_FOLDER, UNZIPPED_FOLDER, XML_FOLDER = 'xml', P7M_FOLDER = 'p7m', CSV_OUTPUT = 'output.csv'):
     print("=== PROJECT COORDINATION STARTING ===\n")
     
     # Step 1: Group 1 - Unzip files
     print("Step 1: Group 1 - Unzipping files...")
-    unzipped_path = unzip(INPUT_FOLDER, UNZIPPED_FOLDER)
+    unzipped_path = estrai_zip_ricorsivo(INPUT_FOLDER, cartella_destinazione=UNZIPPED_FOLDER)
     print(f"Unzipping completed. Files available at: {unzipped_path}\n")
     
     # Step 2: Group 2 - Separate XML and P7M files
@@ -90,7 +74,7 @@ def main():
     
     # Step 4: Group 4 - Convert XML to CSV
     print("Step 4: Group 4 - Converting XML to CSV...")
-    csv_result = xml_to_csv(XML_FOLDER, CSV_OUTPUT)
+    # csv_result = xml_to_csv(XML_FOLDER, CSV_OUTPUT)
     print(f"CSV conversion completed: {csv_result}\n")
     
     print("=== PROJECT COORDINATION COMPLETED ===")
