@@ -1,5 +1,7 @@
 from lxml import objectify
 import pandas as pd
+import shutil
+import os
 
 def find_child_by_tag(parent, tag):
     for child in parent.iterchildren():
@@ -70,8 +72,20 @@ def get_linee_dettaglio(body, cedente_info, data_fattura, codici_cessionario):
             rows.append(row)
     return rows
 
-def dataframe_linee_da_xml(path):
-    xml = objectify.parse(open(path))
+def dataframe_linee_da_xml(path, error_dir=None):
+    try:
+        xml = objectify.parse(open(path))
+    except Exception as e:
+        print(f"Error parsing XML: {e}")
+        # Se error_dir è fornito, copia il file problematico lì
+        if error_dir is not None:
+            os.makedirs(error_dir, exist_ok=True)
+            try:
+                shutil.copy2(path, error_dir)
+                print(f"File problematico copiato in: {error_dir}")
+            except Exception as copy_err:
+                print(f"Errore nel copiare il file: {copy_err}")
+        return pd.DataFrame()
     root = xml.getroot()
     header = find_child_by_tag(root, 'FatturaElettronicaHeader')
     body = find_child_by_tag(root, 'FatturaElettronicaBody')

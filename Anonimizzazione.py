@@ -16,12 +16,16 @@ def anonimizza_fattura(df):
         return df, diz
 
 
-def xml_to_csvs(path_xml, output_folder):
+def xml_tocsvs(path_xml, output_folder):
     df = pd.DataFrame()
     diz={}
     for file in os.listdir(path_xml): 
         xml_path = os.path.join(path_xml, file)
-        df_clean = creazione_df.dataframe_linee_da_xml(xml_path)
+        try:
+            df_clean = creazione_df.dataframe_linee_da_xml(xml_path)
+        except Exception as e:
+            print(f"Errore nel processare il file {file}: {e}")
+            break  # Skip to the next file if there's an error
         encrypted_xml, dic = anonimizza_fattura(df_clean)
         df = pd.concat([df, encrypted_xml], ignore_index=True)
         diz.update(dic)  
@@ -32,13 +36,14 @@ def xml_to_csvs(path_xml, output_folder):
 
     for cessionario in df['CodiceFiscaleCessionario'].unique(): 
         df_data_azienda=df[df['CodiceFiscaleCessionario'] == cessionario]
-        path=pathlib.Path(output_folder)/(cessionario+'.csv')
+        path = pathlib.Path(output_folder) / (str(cessionario) + '.csv')
         path.parent.mkdir(parents=True, exist_ok=True)
         df_data_azienda.drop(columns=['CodiceFiscaleCessionario']).to_csv(path, index=False)
         df_data_azienda = pd.DataFrame()
+    
 
 if __name__ == "__main__":
-    path_xml = 'path_to_your_xml_files'  # Replace with your XML files path
-    output_folder = 'output_csvs'  # Replace with your desired output folder
-    xml_to_csvs(path_xml, output_folder)
+    path_xml = r"C:\Users\JadeOliverGuevarra\Documents\prova\pjwork\dframev1\data"  # Replace with your XML files path
+    output_folder = r"C:\Users\JadeOliverGuevarra\Documents\prova\pjwork\dframev1\output_group_1"  # Replace with your desired output folder
+    xml_tocsvs(path_xml, output_folder)
     print(f"CSV files created in {output_folder} and anonymization mapping saved in cifratura.csv")
