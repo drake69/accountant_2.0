@@ -1,5 +1,5 @@
 from p7m_to_xml import process_folder
-from unzip import estrai_zip_ricorsivo
+from unzip import unzip
 from separazione import separate_files
 from Anonimizzazione import xml_tocsvs
 
@@ -8,8 +8,8 @@ def main(INPUT_FOLDER, UNZIPPED_FOLDER, XML_FOLDER = 'xml', P7M_FOLDER = 'p7m', 
     
     # Step 1: Group 1 - Unzip files
     print("Step 1: Group 1 - Unzipping files...")
-    unzipped_path = estrai_zip_ricorsivo(INPUT_FOLDER, cartella_destinazione=UNZIPPED_FOLDER)
-    print(f"Unzipping completed. Files available at: {unzipped_path}\n")
+    unzip(INPUT_FOLDER, cartella_destinazione=UNZIPPED_FOLDER)
+    print(f"Unzipping completed. Files available at: {UNZIPPED_FOLDER}\n")
     
     # Step 2: Group 2 - Separate XML and P7M files
     print("Step 2: Group 2 - Separating files...")
