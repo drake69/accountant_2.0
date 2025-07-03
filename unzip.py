@@ -130,7 +130,7 @@ def estrai_zip_ricorsivo(cartella_base, elimina_zip=False, cartella_destinazione
 # Esempio di utilizzo
 if __name__ == "__main__":
     # Estrai tutti i ZIP (inclusi quelli annidati) nella cartella "unzipped"
-    risultati = estrai_zip_ricorsivo("/Users/lcorsaro/Desktop/PW_2025/ZIP", elimina_zip=True, 
+    risultati = estrai_zip_ricorsivo("/Users/lcorsaro/Desktop/PW_2025/ZIP", elimina_zip=False, 
                                      cartella_destinazione="/Users/lcorsaro/Desktop/PW_2025/ALL")
     
     print(f"\nRiepilogo finale: {len(risultati)} file ZIP elaborati")
